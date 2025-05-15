@@ -8,21 +8,12 @@ public class Cliente {
 	
 	public Cliente( ) {}
 	
-	public Cliente(int id, String nome, String email, String telefone) {
-		this.id = id;
+	public Cliente(String nome, String email, String telefone) {
 		this.nome = nome;
 		this.email = email;
 		this.telefone = telefone;
 	}
 	
-	public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
-    }
-
     public String getNome() {
         return nome;
     }
