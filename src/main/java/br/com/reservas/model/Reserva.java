@@ -4,16 +4,15 @@ import java.time.LocalDateTime;
 
 public class Reserva {
     private int id;
-    private int clienteId;
-    private int mesaId;
+    private int cliente;
+    private int mesa;
     private LocalDateTime dataHora;
     
     public Reserva() {}
 
-    public Reserva(int id, int clienteId, int mesaId, LocalDateTime dataHora) {
-        this.id = id;
-        this.clienteId = clienteId;
-        this.mesaId = mesaId;
+    public Reserva(int cliente, int mesa, LocalDateTime dataHora) {
+        this.cliente = cliente;
+        this.mesa = mesa;
         this.dataHora = dataHora;
     }
 
@@ -25,20 +24,20 @@ public class Reserva {
         this.id = id;
     }
 
-    public int getClienteId() {
-        return clienteId;
+    public int getCliente() {
+        return cliente;
     }
 
-    public void setClienteId(int clienteId) {
-        this.clienteId = clienteId;
+    public void setCliente(int cliente) {
+        this.cliente = cliente;
     }
 
-    public int getMesaId() {
-        return mesaId;
+    public int getMesa() {
+        return mesa;
     }
 
-    public void setMesaId(int mesaId) {
-        this.mesaId = mesaId;
+    public void setMesa(int mesa) {
+        this.mesa = mesa;
     }
 
     public LocalDateTime getDataHora() {

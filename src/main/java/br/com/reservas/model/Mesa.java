@@ -7,8 +7,7 @@ public class Mesa {
     
     public Mesa() {}
 
-    public Mesa(int id, int numero, int capacidade) {
-        this.id = id;
+    public Mesa(int numero, int capacidade) {
         this.numero = numero;
         this.capacidade = capacidade;
     }
