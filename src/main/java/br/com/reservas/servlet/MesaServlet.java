@@ -22,6 +22,6 @@ public class MesaServlet extends HttpServlet{
         MesaDao dao = new MesaDao();
         dao.inserir(mesa);
 
-        response.sendRedirect("cliente.jsp?sucesso=true");
+        response.sendRedirect("mesa.jsp?sucesso=true");
     }
 }

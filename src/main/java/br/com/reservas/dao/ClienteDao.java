@@ -52,7 +52,6 @@ public class ClienteDao {
         return cliente;
     }
 
-    // Listar todos clientes (SELECT *)
     public List<Cliente> listarTodos() {
         String sql = "SELECT * FROM cliente";
         List<Cliente> clientes = new ArrayList<>();
