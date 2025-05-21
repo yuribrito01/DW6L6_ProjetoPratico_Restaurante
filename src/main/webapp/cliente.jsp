@@ -3,9 +3,11 @@
 <html>
 <head>
     <title>Cadastro de Cliente</title>
+    <link rel="stylesheet" href="css/style.css">
 </head>
 <body>
 
+<div class="container">
 <h2>Cadastro de Cliente</h2>
 
 <% 
@@ -18,17 +20,18 @@
 %>
 
 <form action="cliente" method="post">
-    <label>Nome:</label><br>
-    <input type="text" name="nome" required><br><br>
+    <label>Nome:</label>
+    <input type="text" name="nome" required>
 
-    <label>E-mail:</label><br>
-    <input type="email" name="email" required><br><br>
+    <label>E-mail:</label>
+    <input type="email" name="email" required>
 
-    <label>Telefone:</label><br>
-    <input type="text" name="telefone" required><br><br>
+    <label>Telefone:</label>
+    <input type="text" name="telefone" required>
 
     <input type="submit" value="Cadastrar">
 </form>
+</div>
 
 </body>
 </html>
