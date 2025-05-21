@@ -54,9 +54,6 @@
     </form>
 </div>
 
-<!-- Flatpickr JS -->
-<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-
 <script>
     flatpickr("#dataHora", {
         enableTime: true,
