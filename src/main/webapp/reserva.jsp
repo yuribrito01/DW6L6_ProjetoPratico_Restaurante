@@ -17,33 +17,58 @@
 <html>
 <head>
     <title>Nova Reserva</title>
+    <link rel="stylesheet" href="css/style.css">
+    <!-- Flatpickr CSS -->
+		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+	<!-- Flatpickr JS -->
+		<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/scrollPlugin.js"></script>
+	    
 </head>
 <body>
 
-<h2>Fazer Reserva</h2>
+<div class="container">
+    <h2>Fazer Reserva</h2>
 
-<form action="reserva" method="post">
-    <label>Cliente:</label><br>
-    <select name="clienteId" required>
-        <option value="">Selecione</option>
-        <% for (Cliente c : clientes) { %>
-            <option value="<%= c.getId() %>"><%= c.getNome() %></option>
-        <% } %>
-    </select><br><br>
+    <form action="reserva" method="post">
+        <label for="cliente">Cliente:</label>
+        <select id="cliente" name="clienteId" required>
+            <option value="">Selecione</option>
+            <% for (Cliente c : clientes) { %>
+                <option value="<%= c.getId() %>"><%= c.getNome() %></option>
+            <% } %>
+        </select>
 
-    <label>Mesa:</label><br>
-    <select name="mesaId" required>
-        <option value="">Selecione</option>
-        <% for (Mesa m : mesas) { %>
-            <option value="<%= m.getId() %>">Mesa <%= m.getNumero() %> (Cap: <%= m.getCapacidade() %>)</option>
-        <% } %>
-    </select><br><br>
+        <label for="mesa">Mesa:</label>
+        <select id="mesa" name="mesaId" required>
+            <option value="">Selecione</option>
+            <% for (Mesa m : mesas) { %>
+                <option value="<%= m.getId() %>">Mesa <%= m.getNumero() %> (Cap: <%= m.getCapacidade() %>)</option>
+            <% } %>
+        </select>
 
-    <label>Data e HoraS da Reserva:</label><br>
-    <input type="datetime-local" name="dataHora" required><br><br>
+        <label for="dataHora">Data e Hora da Reserva:</label>
+		<input type="text" id="dataHora" name="dataHora" required onkeydown="return false;">
 
-    <input type="submit" value="Confirmar Reserva">
-</form>
+        <input type="submit" value="Confirmar Reserva">
+    </form>
+</div>
+
+<!-- Flatpickr JS -->
+<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+
+<script>
+    flatpickr("#dataHora", {
+        enableTime: true,
+        dateFormat: "Y-m-d H:i", // com espaço entre data e hora
+        time_24hr: true,
+        minuteIncrement: 15,
+        allowInput: false, // impede digitação manual
+        minDate: "today", // bloqueia datas passadas
+        plugins: [new scrollPlugin()]
+    });
+</script>
 
 </body>
 </html>
+

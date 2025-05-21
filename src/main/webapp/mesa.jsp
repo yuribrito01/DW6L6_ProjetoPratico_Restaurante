@@ -1,23 +1,25 @@
-<%@ page language="java" contentType="text/html; charset=UTF-8"
-    pageEncoding="UTF-8"%>
+<%@ page contentType="text/html;charset=UTF-8" language="java" %>
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-	<title>Cadastro de Mesa</title>
+    <title>Cadastro de Mesa</title>
+    <link rel="stylesheet" href="css/style.css">           
 </head>
 <body>
-	<h2>Cadastro de Mesa</h2>
-	
-	<form action="mesa" method="post">
-		<label>Numero:</label>
-		<input type="number" name="numero" required><br><br>
-		
-		<label>Capacidade:</label>
-		<input type="number" name="capacidade" required><br><br>
-		
-		<input type="submit" value="Cadastrar">
-	</form>
+
+<div class="container">
+    <h2>Cadastro de Mesa</h2>
+
+    <form action="mesa" method="post">
+        <label for="numero">Número da Mesa:</label>
+        <input type="number" id="numero" name="numero" required>
+
+        <label for="capacidade">Capacidade de pessoas:</label>
+        <input type="number" id="capacidade" name="capacidade" required>
+
+        <input type="submit" value="Salvar">
+    </form>
+</div>
 
 </body>
 </html>
