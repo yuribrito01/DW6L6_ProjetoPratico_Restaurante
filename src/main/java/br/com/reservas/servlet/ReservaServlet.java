@@ -11,6 +11,7 @@ import jakarta.servlet.http.HttpServletResponse;
 
 import java.io.IOException;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
 
 @WebServlet("/reserva")
 public class ReservaServlet extends HttpServlet {
@@ -22,7 +23,9 @@ public class ReservaServlet extends HttpServlet {
         try {
             int clienteId = Integer.parseInt(request.getParameter("clienteId"));
             int mesaId = Integer.parseInt(request.getParameter("mesaId"));
-            LocalDateTime dataHora = LocalDateTime.parse(request.getParameter("dataHora"));
+            DateTimeFormatter formatter = DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm");
+            LocalDateTime dataHora = LocalDateTime.parse(request.getParameter("dataHora"), formatter);
+
 
             Reserva reserva = new Reserva(clienteId, mesaId, dataHora);
             ReservaDao dao = new ReservaDao();

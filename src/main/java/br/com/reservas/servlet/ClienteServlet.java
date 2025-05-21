@@ -18,12 +18,20 @@ public class ClienteServlet extends HttpServlet{
         String nome = request.getParameter("nome");
         String email = request.getParameter("email");
         String telefone = request.getParameter("telefone");
+        String tipo = request.getParameter("tipo");
 
-        Cliente cliente = new Cliente(nome, email, telefone);
+        Cliente cliente = new Cliente(nome, email, telefone, tipo);
         ClienteDao dao = new ClienteDao();
         dao.inserir(cliente);
+        
+        if ("admin".equals(tipo)) {
+            response.sendRedirect("mesa.jsp");
+        } else if ("cliente".equals(tipo)) {
+            response.sendRedirect("reserva.jsp");
+        } else {
+            response.sendRedirect("erro.jsp");
+        }
 
-        response.sendRedirect("cliente.jsp?sucesso=true");
     }
 
 }

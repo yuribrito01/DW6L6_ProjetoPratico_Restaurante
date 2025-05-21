@@ -85,7 +85,36 @@ DW6L6_ProjetoPratico_Restaurante/
 Crie o banco com o script abaixo no MySQL:
 
 ```sql
-INSERIR O SCRIPT DO BANCO AQUI
+-- Criar banco de dados
+CREATE DATABASE IF NOT EXISTS reservas_db;
+USE reservas_db;
+
+-- Tabela cliente
+CREATE TABLE cliente (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    nome VARCHAR(100) NOT NULL,
+    email VARCHAR(100),
+    telefone VARCHAR(20),
+    tipo VARCHAR(50)
+);
+
+-- Tabela mesa
+CREATE TABLE mesa (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    numero INT NOT NULL,
+    capacidade INT NOT NULL
+);
+
+-- Tabela reserva
+CREATE TABLE reserva (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    cliente_id INT NOT NULL,
+    mesa_id INT NOT NULL,
+    data_hora DATETIME NOT NULL,
+    FOREIGN KEY (cliente_id) REFERENCES cliente(id),
+    FOREIGN KEY (mesa_id) REFERENCES mesa(id)
+);
+
 
 ```
 
