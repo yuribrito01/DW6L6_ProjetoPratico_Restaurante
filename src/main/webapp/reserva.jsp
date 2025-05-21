@@ -19,11 +19,11 @@
     <title>Nova Reserva</title>
     <link rel="stylesheet" href="css/style.css">
     <!-- Flatpickr CSS -->
-		<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
-	<!-- Flatpickr JS -->
-		<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
-	    <script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/scrollPlugin.js"></script>
-	    
+	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
+    <!-- Flatpickr JS -->
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr"></script>
+	<script src="https://cdn.jsdelivr.net/npm/flatpickr/dist/plugins/scrollPlugin.js"></script>
+	   
 </head>
 <body>
 
