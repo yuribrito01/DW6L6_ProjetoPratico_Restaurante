@@ -57,7 +57,7 @@
                     <tbody>
                         <% for (Mesa m : mesas) { %>
                         <tr>
-                             <!-- <td><%= m.getId() %></td> -->
+                           <!-- <td><%= m.getId() %></td> -->
                             <td><%= m.getNumero() %></td>
                             <td><%= m.getCapacidade() %></td>
                         </tr>
@@ -71,7 +71,7 @@
                 <table class="table table-bordered table-hover align-middle table-sm">
                     <thead class="table-light small">
                         <tr>
-                            <!-- <th>ID</th> -->
+                           <!-- <th>ID</th> -->
                             <th>Cliente</th>
                             <th>Mesa</th>
                             <th>Data e Hora</th>
@@ -80,7 +80,7 @@
                     <tbody>
                         <% for (Reserva r : reservas) { %>
                         <tr>
-                            <td><%= r.getId() %></td>
+                            <!-- <td><%= r.getId() %></td> -->
                             <td><%= r.getCliente() %></td>
                             <td><%= r.getMesa() %></td>
                             <td><%= r.getDataHora() %></td>
