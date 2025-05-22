@@ -49,15 +49,15 @@
                 <table class="table table-bordered table-hover align-middle table-sm">
                     <thead class="table-light small">
                         <tr>
-                            <th>ID</th>
-                            <th>Número</th>
+                           <!--<th>ID</th> -->
+                            <th>Número da mesa</th>
                             <th>Capacidade</th>
                         </tr>
                     </thead>
                     <tbody>
                         <% for (Mesa m : mesas) { %>
                         <tr>
-                            <td><%= m.getId() %></td>
+                             <!-- <td><%= m.getId() %></td> -->
                             <td><%= m.getNumero() %></td>
                             <td><%= m.getCapacidade() %></td>
                         </tr>
@@ -71,7 +71,7 @@
                 <table class="table table-bordered table-hover align-middle table-sm">
                     <thead class="table-light small">
                         <tr>
-                            <th>ID</th>
+                            <!-- <th>ID</th> -->
                             <th>Cliente</th>
                             <th>Mesa</th>
                             <th>Data e Hora</th>
@@ -125,4 +125,3 @@
 </script>
 </body>
 </html>
-
