@@ -120,12 +120,20 @@ CREATE TABLE reserva (
 
 ### Configuração
 
-- Banco de dados: MySQL
-- Nome do banco: `reservas_db`
-- Usuário padrão: `root`
-- Senha padrão do seu MySQL (ajustável em `ConexaoUtil.java`)
-- Tomcat: versão 11 (compatível com Jakarta EE 10)
-- IDE sugerida: Eclipse
+- Banco de dados: MySQL Workbench - https://dev.mysql.com/downloads/workbench/
+    - Usuário padrão: `root`
+    - Senha padrão do seu MySQL é ajustável no arquivo `ConexaoUtil.java`
+- Tomcat: versão 11 (compatível com Jakarta EE 10) - https://tomcat.apache.org/download-11.cgi
+- IDE: Eclipse IDE for Enterprise Java and Web Developers - https://www.eclipse.org/downloads/packages/release/2022-06/r/eclipse-ide-enterprise-java-and-web-developers
+
+### Para executar:
+Obs: Após configurar o banco de dados com as instruções acima.
+1.  Abra o CMD dentro de uma pasta de sua preferência no gerenciador de arquivos
+2.  Rode `git clone https://github.com/yuribrito01/DW6L6_ProjetoPratico_Restaurante.git`, ou baixe nosso projeto
+3.  Abra o Eclipse > File > Import > Select "Existing Projects into Workspace"
+4.  Selecione o projeto clonado/baixado no seu gerenciador de arquivos
+5.  Selecione novamente em "Projects:" > Clique em "Finish"
+6.  Execute o arquivo `cliente.jsp` com "Run on Server". Caso não esteja executando, será necessário ir em "Project" > "Clean..." > depois "Build Project"
 
 ### Observações
 
