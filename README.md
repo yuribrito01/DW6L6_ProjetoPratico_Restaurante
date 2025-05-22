@@ -133,7 +133,7 @@ Obs: Após configurar o banco de dados com as instruções acima.
 3.  Abra o Eclipse > File > Import > Select "Existing Projects into Workspace"
 4.  Selecione o projeto clonado/baixado no seu gerenciador de arquivos
 5.  Selecione novamente em "Projects:" > Clique em "Finish"
-6.  Execute o arquivo `cliente.jsp` com "Run on Server". Caso não esteja executando, será necessário ir em "Project" > "Clean..." > depois "Build Project"
+6.  Execute o projeto com "Run on Server" no Tomcat. Caso não esteja executando, será necessário ir em "Project" > "Clean..." > depois "Build Project"
 
 ### Observações
 
