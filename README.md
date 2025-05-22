@@ -123,7 +123,7 @@ CREATE TABLE reserva (
 - Banco de dados: MySQL
 - Nome do banco: `reservas_db`
 - Usuário padrão: `root`
-- Senha padrão: `admin123` (ajustável em `ConexaoUtil.java`)
+- Senha padrão do seu MySQL (ajustável em `ConexaoUtil.java`)
 - Tomcat: versão 11 (compatível com Jakarta EE 10)
 - IDE sugerida: Eclipse
 
@@ -135,7 +135,8 @@ CREATE TABLE reserva (
 
 ### Dificuldades encontradas
 
-LISTAR as dificuldades encontradas e ate mesmo colocar pedaços de código se for o caso
+A maior dificuldade encontrada (que não é tão séria e nem impactou tanto) por ambos foi, com certeza, a preparação do ambiente do projeto no Eclipse. Baixar e acostumar a usar Tomcat, baixando .jar, entender o Servlet, checar o output no Java Build Path, entre outras coisas do tipo. Mas, depois de tudo configurado, não tivemos mais problemas!
+Além disso, a linguagem Java ainda é um pequeno desafio para nós dois, por falta de costume com o uso dela. O projeto em si não apresentou um desafio muito grande para ser desenvoldido pois a proposta era simples!
 
 ### Autores
 
