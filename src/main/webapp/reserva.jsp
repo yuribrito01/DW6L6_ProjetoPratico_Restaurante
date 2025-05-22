@@ -17,8 +17,6 @@
 <html>
 <head>
     <title>Nova Reserva</title>
-  
-    <link rel="stylesheet" href="css/style.css">
     <!-- Flatpickr CSS -->
 	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/flatpickr/dist/flatpickr.min.css">
     <!-- Flatpickr JS -->

@@ -16,14 +16,13 @@
 <html>
 <head>
     <title>Cadastro de Mesa</title>
-    <link rel="stylesheet" href="css/style.css">  
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet">         
 </head>
 <body>
 
 <div class="container py-5 d-flex justify-content-center">
     <div class="w-100" style="max-width: 800px;">
-    	<h4 class="mb-4 text-center fw-light">Nova Mesa</h4>
+    	<h2 class="mb-4 text-center fw-light">Nova Mesa</h2>
     	<div class="mx-auto" style="max-width: 300px;">
     		<form action="mesa" method="post" class="mb-4">
                 
@@ -67,7 +66,7 @@
                 </table>
             </div>
 
-            <h5 class="mb-3 fw-semibold text-secondary">Reservas Cadastradas</h5>
+            <h5 class="mb-3 fw-semibold text-secondary">Mesas Reservadas</h5>
             <div class="table-responsive">
                 <table class="table table-bordered table-hover align-middle table-sm">
                     <thead class="table-light small">
