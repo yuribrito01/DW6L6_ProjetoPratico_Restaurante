@@ -1,154 +1,53 @@
-# DW6L6 - Projeto Pratico
-Projeto 01: Trabalho Prático de Desenvolvimento Web com Java, JDBC e MySQL
+<img src="https://img.shields.io/badge/STATUS-CONCLUÍDO-green"/>
 
-> Data de entrega: 22/05/2025
+# Projeto CRUD Spring Boot
 
-Desenvolvido por Pamela Dantas e Yuri Brito durante a disciplina de DESENVOLVIMENTO DE SISTEMAS WEB (DSWL6), ministrada pelo Professor Dr. Carlos Eduardo Beluzo no Curso Análise e Desenvolvimento de Sistemas, IFSP Campinas.
+## Sobre o Projeto:
 
-## Sistema de Reservas para Restaurante:
-Sistema de reservas que permite aos clientes fazerem reservas de mesas em um restaurante, visualizando a disponibilidade de horários e confirmando reservas.
+Uma aplicação web modelada no padrão MVC em Java e construída com o Spring Boot, o projeto conta com uma estrutura de CRUD, no qual os dados estão sendo persistidos em um banco de dados (MySQL). Na camada de visualização foi utilizado HTML, CSS, o framework Bootstrap e o template Thymeleaf.  Também foi utilizado o JavaScript para validação de uma regra de negócio. O sistema possui outras funcionalidades como, tela de login/cadastro, criptografia de dados do usuário, entre outras.
+ 
+## Tecnologias Utilizadas
 
-### Tecnologias Utilizadas
-
-- Java 11+
-- Jakarta Servlet API
-- JSP (Java Server Pages)
-- JDBC (Java Database Connectivity)
+- Java
+- Spring Boot
+- JPA / Hibernate
+- Maven
+- HTML/CSS/JS
+- Bootstrap
 - MySQL
-- Apache Tomcat 11.x
-- Eclipse IDE
-- MySQL Connector/J
 
-### Estrutura do Projeto
+## Demonstração
 
-```
-DW6L6_ProjetoPratico_Restaurante/
-└───src
-    └───main
-        ├───java
-        │   └───br.com.reservas
-        │                ├───dao
-        │                │   ├── ClienteDao.java
-        │                │   ├── MesaDao.java
-        │                │   └── ReservaDao.java
-        │                │
-        │                ├───model
-        │                │   ├── Cliente.java
-        │                │   ├── Mesa.java
-        │                │   └── Reserva.java
-        │                │
-        │                ├───servlet
-        │                │   ├── ClienteServlet.java
-        │                │   ├── MesaServlet.java
-        │                │   └── ReservaServlet.java
-        │                │
-        │                └───util
-        │                    └── ConexaoUtil.java
-        │
-        └───webapp
-            ├── cliente.jsp
-            ├── mesa.jsp
-            ├── reserva.jsp
-            │
-            ├── META-INF
-            │   └── MANIFEST.MF
-            │
-            └── WEB-INF
-                ├── web.xml
-                └── lib
-                    └── mysql-connector-j-9.3.0.jar
-```
+![demo](https://user-images.githubusercontent.com/89096854/170026187-57aa04f4-189b-4c00-8cc8-16a1227a5eb7.gif)
 
-### Funcionalidades Detalhadas
+### Formulário de Cadastro
+![formulario de cadastro](https://user-images.githubusercontent.com/89096854/170031976-645e9bd8-eaca-4a84-805c-588100e1a770.PNG)
 
-#### > Gerenciamento de Clientes
+### Lista de Alunos
+![Lista de alunos](https://user-images.githubusercontent.com/89096854/170031981-68cf5454-a727-467c-82e6-1ba2f53c2900.PNG)
 
-- **Cadastro de Cliente**: O `ClienteServlet` permite cadastrar novos clientes via formulário na página `cliente.jsp`. Os dados são armazenados no banco de dados por meio da classe `ClienteDao`.
-- **Listagem de Clientes**: Pode ser implementada com uma página adicional que utiliza `ClienteDao` para buscar todos os registros.
-- **Edição de Cliente**: Implementável reutilizando o mesmo formulário de cadastro, com dados previamente preenchidos.
-- **Exclusão de Cliente**: Pode ser implementada com ação no servlet usando o ID do cliente.
 
-#### > Gerenciamento de Mesas
+## Banco de Dados
 
-- **Cadastro de Mesa**: O `MesaServlet` cadastra novas mesas através do formulário em `mesa.jsp`, usando `MesaDao` para inserção no banco.
-- **Listagem de Mesas**: Pode ser feita exibindo todas as mesas usando `MesaDao`.
-- **Edição e Exclusão de Mesa**: Também implementáveis por meio de servlets e o DAO correspondente.
+### Entidade Aluno
+![Entidade Aluno](https://user-images.githubusercontent.com/89096854/170030916-5c05c8c3-71d7-432e-aa6c-02b0ccf30409.PNG)
 
-#### > Gerenciamento de Reservas
+### Entidade Usuário
+![Entidade Usuario](https://user-images.githubusercontent.com/89096854/170030921-8948e471-b0c1-4fcc-94aa-4bc94a554df9.PNG)
 
-- **Cadastro de Reserva**: Realizado por `ReservaServlet` a partir do formulário em `reserva.jsp`, armazenando os dados via `ReservaDao`.
-- **Listagem de Reservas**: Pode ser feita com `ReservaDao` retornando todas as reservas.
-- **Edição e Exclusão de Reserva**: Possível utilizando os métodos de `ReservaDao` e `ReservaServlet`.
+## Instalação
 
-### Banco de Dados
+O projeto é gerenciado pelo Maven, então para usa-lo basta importa-lo para uma IDE.
 
-Crie o banco com o script abaixo no MySQL:
-
-```sql
--- Criar banco de dados
-CREATE DATABASE IF NOT EXISTS reservas_db;
-USE reservas_db;
-
--- Tabela cliente
-CREATE TABLE cliente (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100),
-    telefone VARCHAR(20),
-    tipo VARCHAR(50)
-);
-
--- Tabela mesa
-CREATE TABLE mesa (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    numero INT NOT NULL,
-    capacidade INT NOT NULL
-);
-
--- Tabela reserva
-CREATE TABLE reserva (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    cliente_id INT NOT NULL,
-    mesa_id INT NOT NULL,
-    data_hora DATETIME NOT NULL,
-    FOREIGN KEY (cliente_id) REFERENCES cliente(id),
-    FOREIGN KEY (mesa_id) REFERENCES mesa(id)
-);
-
+## Configurações do banco de dados
+Você pode criar um banco de dados MySQL com o nome o nome de sua preferência, porém é necessario adequar o projeto de acordo com as suas configurações. Para isso abra o arquivo application.properties, localizado em src/main/resources/application.properties e altere os seguintes comandos ao arquivo:
 
 ```
+- spring.datasource.url = jdbc:mysql://localhost:3306/nome-do-seu-banco-de-dados?useTimezone=true&serverTimezone=UTC
+- spring.datasource.username = root
+- spring.datasource.password = root
+```
+ 
 
-### Configuração
-
-- Banco de dados: MySQL Workbench - https://dev.mysql.com/downloads/workbench/
-    - Usuário padrão: `root`
-    - Senha padrão do seu MySQL é ajustável no arquivo `ConexaoUtil.java`
-- Tomcat: versão 11 (compatível com Jakarta EE 10) - https://tomcat.apache.org/download-11.cgi
-- IDE: Eclipse IDE for Enterprise Java and Web Developers - https://www.eclipse.org/downloads/packages/release/2022-06/r/eclipse-ide-enterprise-java-and-web-developers
-
-### Para executar:
-Obs: Após configurar o banco de dados com as instruções acima.
-1.  Abra o CMD dentro de uma pasta de sua preferência no gerenciador de arquivos
-2.  Rode `git clone https://github.com/yuribrito01/DW6L6_ProjetoPratico_Restaurante.git`, ou baixe nosso projeto
-3.  Abra o Eclipse > File > Import > Select "Existing Projects into Workspace"
-4.  Selecione o projeto clonado/baixado no seu gerenciador de arquivos
-5.  Selecione novamente em "Projects:" > Clique em "Finish"
-6.  Execute o projeto com "Run on Server" no Tomcat. Caso não esteja executando, será necessário ir em "Project" > "Clean..." > depois "Build Project"
-
-### Observações
-
-- Certifique-se de ter o conector MySQL (`mysql-connector-j-9.3.0.jar`) em `WEB-INF/lib`.
-- Configure corretamente o nome do projeto no `web.xml` ou na URL do navegador (ex: `http://localhost:8080/DW6L6_ProjetoPratico_Restaurante/cliente`).
-- Verifique se a aplicação está sendo de fato implantada no Tomcat.
-
-### Dificuldades encontradas
-
-A maior dificuldade encontrada (que não é tão séria e nem impactou tanto) por ambos foi, com certeza, a preparação do ambiente do projeto no Eclipse. Baixar e acostumar a usar Tomcat, baixando .jar, entender o Servlet, checar o output no Java Build Path, entre outras coisas do tipo. Mas, depois de tudo configurado, não tivemos mais problemas!
-Além disso, a linguagem Java ainda é um pequeno desafio para nós dois, por falta de costume com o uso dela. O projeto em si não apresentou um desafio muito grande para ser desenvoldido pois a proposta era simples!
-
-### Autores
-
-- Yuri Brito — [@yuribrito01](https://github.com/yuribrito01)
-- Pamela Dantas — [@pameladantasp](https://github.com/pameladantasp)
-
-
+## Execução
+Execute o projeto através do IDE, abra um navegador de sua preferência e digite: http://localhost:8080
