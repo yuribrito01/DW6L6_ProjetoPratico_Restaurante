@@ -84,4 +84,5 @@ Gerenciado pelo Maven.
 - Baixe ou clone o projeto em uma IDE (usamos VS Code).
 - Abra o arquivo "GerenciamentoRestauranteApplication.java" (em src\main\java\br\com\gerenciamento) e clique para executar
 ![image](https://github.com/user-attachments/assets/1ff82b53-82eb-4d65-af78-e6cb6bdc4818)
-- Execute o projeto através do IDE, abra um navegador e digite: http://localhost:8080
+- Ou, abra o cmd da IDE no mesmo path do arquivo pom.xml e execute: mvn spring-boot:run
+- Após a execução, abra um navegador e digite: http://localhost:8080
