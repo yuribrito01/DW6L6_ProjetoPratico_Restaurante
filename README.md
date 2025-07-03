@@ -32,7 +32,7 @@ Uma aplicação web modelada no padrão MVC em Java e construída com o Spring B
 
 ## Demonstração
 
-![demo]()
+![sistemarestaurante](https://github.com/user-attachments/assets/15d92efb-287d-430a-a8f6-23817da5d154)
 
 
 ## Banco de Dados
