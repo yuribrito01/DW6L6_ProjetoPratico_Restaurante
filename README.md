@@ -1,29 +1,38 @@
 <img src="https://img.shields.io/badge/STATUS-CONCLUÍDO-green"/>
+
 # DW6L6 - Projeto Pratico
 Projeto 01: Trabalho Prático de Desenvolvimento Web com Java.
 
 Desenvolvido por Pamela Dantas e Yuri Brito durante a disciplina de DESENVOLVIMENTO DE SISTEMAS WEB (DSWL6), ministrada pelo Professor Dr. Carlos Eduardo Beluzo no Curso Análise e Desenvolvimento de Sistemas, IFSP Campinas.
 
-# Projeto CRUD Spring Boot
+## Projeto CRUD Spring Boot
 
 ## Sobre o Projeto:
-
+Sistema de Reservas para Restaurante:
+Sistema que permite aos usuários (nesse caso, simulando funcionários) fazerem reservas de mesas em um restaurante, visualizando a disponibilidade de horários e confirmando reservas.
 Uma aplicação web modelada no padrão MVC em Java e construída com o Spring Boot, o projeto conta com uma estrutura de CRUD, no qual os dados estão sendo persistidos em um banco de dados (MySQL). Na camada de visualização foi utilizado HTML, CSS, o framework Bootstrap e o template Thymeleaf.  Também foi utilizado o JavaScript para validação de uma regra de negócio. O sistema possui outras funcionalidades como, tela de login/cadastro, criptografia de dados do usuário, entre outras.
+
  
 ## Tecnologias Utilizadas
 
-- Java
-- Spring Boot
-- JPA / Hibernate
-- Maven
-- HTML/CSS/JS
-- Bootstrap
-- MySQL
+> Java
+
+> Spring Boot
+
+> JPA / Hibernate
+
+> Maven
+
+> HTML/CSS/JS
+
+> Bootstrap
+
+> MySQL
+
 
 ## Demonstração
 
 ![demo]()
-
 
 
 ## Banco de Dados
@@ -59,9 +68,6 @@ CREATE TABLE reserva (
 );
 ```
 
-## Instalação
-
-O projeto é gerenciado pelo Maven, então para usa-lo basta importa-lo para uma IDE e executar.
 
 ## Configurações do banco de dados
 Crie um banco de dados MySQL com o nome o nome de sua preferência, porém é necessario adequar o projeto de acordo com as suas configurações. Para isso abra o arquivo application.properties, localizado em src/main/resources/application.properties e altere os seguintes comandos ao arquivo:
@@ -71,7 +77,11 @@ Crie um banco de dados MySQL com o nome o nome de sua preferência, porém é ne
 - spring.datasource.username = root
 - spring.datasource.password = root
 ```
- 
 
-## Execução
-Execute o projeto através do IDE, abra um navegador e digite: http://localhost:8080
+
+## Instalação e Execução
+Gerenciado pelo Maven.
+- Baixe ou clone o projeto em uma IDE (usamos VS Code).
+- Abra o arquivo "GerenciamentoRestauranteApplication.java" (em src\main\java\br\com\gerenciamento) e clique para executar
+![image](https://github.com/user-attachments/assets/1ff82b53-82eb-4d65-af78-e6cb6bdc4818)
+- Execute o projeto através do IDE, abra um navegador e digite: http://localhost:8080
