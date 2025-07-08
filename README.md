@@ -1,88 +1,181 @@
 <img src="https://img.shields.io/badge/STATUS-CONCLUÍDO-green"/>
 
-# DW6L6 - Projeto Pratico
-Projeto 01: Trabalho Prático de Desenvolvimento Web com Java.
+# API RESTful para Gerenciamento de Restaurante
 
-Desenvolvido por Pamela Dantas e Yuri Brito durante a disciplina de DESENVOLVIMENTO DE SISTEMAS WEB (DSWL6), ministrada pelo Professor Dr. Carlos Eduardo Beluzo no Curso Análise e Desenvolvimento de Sistemas, IFSP Campinas.
+Trabalho Prático da disciplina de DESENVOLVIMENTO DE SISTEMAS WEB (DSWL6), ministrada pelo Professor Dr. Carlos Eduardo Beluzo no Curso de Análise e Desenvolvimento de Sistemas do IFSP Campinas.
 
-## Projeto CRUD Spring Boot
+**Desenvolvido por:**
+* Pamela Dantas
+* Yuri Brito
 
-## Sobre o Projeto:
-Sistema de Reservas para Restaurante:
-Sistema que permite aos usuários (nesse caso, simulando funcionários) fazerem reservas de mesas em um restaurante, visualizando a disponibilidade de horários e confirmando reservas.
-Uma aplicação web modelada no padrão MVC em Java e construída com o Spring Boot, o projeto conta com uma estrutura de CRUD, no qual os dados estão sendo persistidos em um banco de dados (MySQL). Na camada de visualização foi utilizado HTML, CSS, o framework Bootstrap e o template Thymeleaf.  Também foi utilizado o JavaScript para validação de uma regra de negócio. O sistema possui outras funcionalidades como, tela de login/cadastro, criptografia de dados do usuário, entre outras.
+---
 
- 
-## Tecnologias Utilizadas
+## 1. Sobre o Projeto
 
-> Java
+Esta aplicação é uma **API RESTful** para o gerenciamento de um restaurante, permitindo o controle de clientes, mesas e reservas. O sistema possui um mecanismo de autenticação seguro baseado em **JSON Web Tokens (JWT)**, com diferentes níveis de acesso (perfis) para os usuários.
 
-> Spring Boot
+### Evolução do Projeto
+Este projeto representa a segunda fase e a evolução de uma aplicação web monolítica que foi inicialmente construída com Spring MVC e Thymeleaf, dando continuidade a um trabalho desenvolvido com Servlets e Hibernate. A arquitetura foi refatorada para uma API RESTful, desacoplando o backend do frontend e implementando um sistema de segurança stateless alinhado com as práticas modernas de mercado.
 
-> JPA / Hibernate
+---
 
-> Maven
+## 2. Tecnologias Utilizadas
 
-> HTML/CSS/JS
+* **Backend:** Java 17, Spring Boot, Spring Security, Spring Data JPA
+* **Banco de Dados:** MySQL
+* **Autenticação:** JSON Web Tokens (JWT)
+* **Build & Dependências:** Maven
+* **Testes da API:** Postman
 
-> Bootstrap
+---
 
-> MySQL
+## 3. Demonstração da Aplicação (Versão Antiga - MVC/)
 
-
-## Demonstração
+O GIF abaixo demonstra a interface gráfica da primeira versão do projeto. A versão atual, uma API RESTful, não possui interface gráfica e é interagida através de endpoints JSON, como documentado no "Guia da API".
 
 ![sistemarestaurante](https://github.com/user-attachments/assets/15d92efb-287d-430a-a8f6-23817da5d154)
 
+---
 
-## Banco de Dados
-```sql
--- Criar banco de dados
-CREATE DATABASE IF NOT EXISTS reservas_db;
-USE reservas_db;
+## 4. Configuração do Ambiente e Execução
 
--- Tabela cliente
-CREATE TABLE cliente (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    nome VARCHAR(100) NOT NULL,
-    email VARCHAR(100),
-    telefone VARCHAR(20),
-    tipocliente VARCHAR(50)
-);
+Siga os passos abaixo para clonar, configurar e executar o projeto localmente.
 
--- Tabela mesa
-CREATE TABLE mesa (
-    id INT AUTO_INCREMENT PRIMARY KEY,
-    numero INT NOT NULL,
-    capacidade INT NOT NULL
-);
+### 4.1. Pré-requisitos
+* Java 17 ou superior.
+* Apache Maven 3.6 ou superior.
+* MySQL 8.0 ou superior.
+* Uma ferramenta de API, como o [Postman](https://www.postman.com/downloads/).
 
--- Tabela reserva
-CREATE TABLE reserva (
-    id INT AUTO_INCREMENT PRIMARY KEYmesacliente,
-    cliente_id INT NOT NULL,
-    mesa_id INT NOT NULL,
-    data_hora DATETIME NOT NULL,
-    FOREIGN KEY (cliente_id) REFERENCES cliente(id),
-    FOREIGN KEY (mesa_id) REFERENCES mesa(id)
-);
-```
+### 4.2. Passos para Execução
+1.  **Clone o repositório:**
+    ```bash
+    git clone [https://github.com/yuribrito01/DW6L6_ProjetoPratico_Restaurante.git](https://github.com/yuribrito01/DW6L6_ProjetoPratico_Restaurante.git)
+    cd DW6L6_ProjetoPratico_Restaurante
+    ```
 
+2.  **Crie o Banco de Dados:**
+    Execute o seguinte comando no seu cliente MySQL para criar o banco de dados necessário:
+    ```sql
+    CREATE DATABASE IF NOT EXISTS reservas_db;
+    ```
 
-## Configurações do banco de dados
-Crie um banco de dados MySQL com o nome o nome de sua preferência, porém é necessario adequar o projeto de acordo com as suas configurações. Para isso abra o arquivo application.properties, localizado em src/main/resources/application.properties e altere os seguintes comandos ao arquivo:
+3.  **Configure a Conexão:**
+    Abra o arquivo `src/main/resources/application.properties` e verifique se as credenciais do seu banco de dados local estão corretas:
+    ```properties
+    spring.datasource.url=jdbc:mysql://localhost:3306/reservas_db?useTimezone=true&serverTimezone=UTC
+    spring.datasource.username=seu_usuario_mysql
+    spring.datasource.password=sua_senha_mysql
+    ```
+    *O Hibernate irá criar as tabelas automaticamente na primeira vez que a aplicação for executada (`ddl-auto=update`).*
 
-```
-- spring.datasource.url = jdbc:mysql://localhost:3306/nome-do-seu-banco-de-dados?useTimezone=true&serverTimezone=UTC
-- spring.datasource.username = root
-- spring.datasource.password = root
-```
+4.  **Execute a Aplicação:**
+    Use o Maven para iniciar o servidor Spring Boot:
+    ```bash
+    mvn spring-boot:run
+    ```
+    A API estará rodando em `http://localhost:8080`.
 
+---
 
-## Instalação e Execução
-Gerenciado pelo Maven.
-- Baixe ou clone o projeto em uma IDE (usamos VS Code).
-- Abra o arquivo "GerenciamentoRestauranteApplication.java" (em src\main\java\br\com\gerenciamento) e clique para executar
-![image](https://github.com/user-attachments/assets/1ff82b53-82eb-4d65-af78-e6cb6bdc4818)
-- Ou, abra o cmd da IDE no mesmo path do arquivo pom.xml e execute: mvn spring-boot:run
-- Após a execução, abra um navegador e digite: http://localhost:8080
+## 5. Guia da API (Endpoints)
+
+Use o Postman ou similar para interagir com os endpoints abaixo.
+
+### 5.1. Autenticação
+
+#### **Registrar um Novo Usuário**
+* **Verbo:** `POST`
+* **URL:** `/api/auth/register`
+* **Descrição:** Cria um novo usuário. A `role` pode ser "ROLE_USER" ou "ROLE_ADMIN".
+* **Corpo da Requisição (JSON):**
+    ```json
+    {
+        "email": "admin@restaurante.com",
+        "user": "admin",
+        "senha": "password123",
+        "role": "ROLE_ADMIN"
+    }
+    ```
+* **Resposta de Sucesso:** `200 OK`
+
+#### **Fazer Login e Obter Token**
+* **Verbo:** `POST`
+* **URL:** `/api/auth/login`
+* **Descrição:** Autentica um usuário e retorna um token JWT.
+* **Corpo da Requisição (JSON):**
+    ```json
+    {
+        "email": "admin@restaurante.com",
+        "senha": "password123"
+    }
+    ```
+* **Resposta de Sucesso (JSON):**
+    ```json
+    {
+        "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkByZXN0YXVyYW50ZS5jb20iLCJpYXQiOjE3..."
+    }
+    ```
+
+### 5.2. Clientes
+
+*Para acessar os endpoints de clientes, é necessário enviar o token JWT no cabeçalho `Authorization` como `Bearer <seu_token>`.*
+
+#### **Listar Todos os Clientes**
+* **Verbo:** `GET`
+* **URL:** `/api/clientes`
+* **Resposta de Sucesso (JSON):**
+    ```json
+    [
+        {
+            "id": 1,
+            "nome": "Cliente VIP Teste",
+            "email": "vip@cliente.com",
+            "telefone": "19912345678",
+            "funcao": "Membro Ouro"
+        }
+    ]
+    ```
+
+#### **Criar um Novo Cliente**
+* **Verbo:** `POST`
+* **URL:** `/api/clientes`
+* **Autorização:** Requer perfil `ROLE_ADMIN`.
+* **Corpo da Requisição (JSON):**
+    ```json
+    {
+        "nome": "Novo Cliente",
+        "email": "novo@cliente.com",
+        "telefone": "19123456789",
+        "funcao": "Regular"
+    }
+    ```
+* **Resposta de Sucesso:** `201 Created` com o objeto do cliente criado.
+
+#### **Deletar um Cliente**
+* **Verbo:** `DELETE`
+* **URL:** `/api/clientes/{id}`
+* **Autorização:** Requer perfil `ROLE_ADMIN`.
+* **Resposta de Sucesso:** `204 No Content`
+
+*(Documente os outros endpoints de Mesa e Reserva aqui seguindo o mesmo modelo)*
+
+---
+
+## 6. Estrutura do Projeto
+
+A aplicação segue uma arquitetura em camadas para promover baixo acoplamento e alta coesão:
+* **`config`**: Configurações de segurança do Spring Security e JWT.
+* **`controller`**: Camada de apresentação, expõe os endpoints `@RestController`.
+* **`dtos`**: Data Transfer Objects para carregar dados entre o cliente e a API.
+* **`exception`**: Classes de exceções customizadas.
+* **`model`**: Entidades JPA que mapeiam as tabelas do banco de dados.
+* **`repository`**: Interfaces Spring Data JPA para acesso aos dados.
+* **`service`**: Camada que contém as regras de negócio da aplicação.
+
+---
+
+## 7. Autores
+
+* Pamela Dantas
+* Yuri Brito
