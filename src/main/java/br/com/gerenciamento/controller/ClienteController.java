@@ -3,78 +3,72 @@ package br.com.gerenciamento.controller;
 import br.com.gerenciamento.model.Cliente;
 import br.com.gerenciamento.repository.ClienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.stereotype.Controller;
-import org.springframework.validation.BindingResult;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestParam;
-import org.springframework.web.servlet.ModelAndView;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
+import org.springframework.web.bind.annotation.*;
 
-import javax.validation.Valid;
 import java.util.List;
 
-@Controller
+@RestController
+@RequestMapping("/api/clientes") // Define "/api/clientes" como a URL base para este controller
 public class ClienteController {
 
     @Autowired
     private ClienteRepository clienteRepository;
 
-    // Mapeamento para exibir o novo formulário de cliente
-    @GetMapping("/clientes/novo")
-    public ModelAndView novoCliente() {
-        ModelAndView modelAndView = new ModelAndView("formCliente");
-        modelAndView.addObject("cliente", new Cliente());
-        return modelAndView;
+    // GET /api/clientes - Lista todos os clientes
+    @GetMapping
+    public List<Cliente> listarTodos() {
+        return clienteRepository.findAll();
     }
 
-    // Ação para salvar o novo cliente (vindo do formCliente.html)
-    @PostMapping("/clientes/salvar")
-    public ModelAndView salvarCliente(@Valid Cliente cliente, BindingResult bindingResult) {
-        if (bindingResult.hasErrors()) {
-            // Se houver erros, retorna para o formulário
-            return new ModelAndView("formCliente");
+    // GET /api/clientes/{id} - Busca um cliente por ID
+    @GetMapping("/{id}")
+    public ResponseEntity<Cliente> buscarPorId(@PathVariable Long id) {
+        return clienteRepository.findById(id)
+                .map(ResponseEntity::ok) // Se encontrar, retorna o cliente com status 200 OK
+                .orElse(ResponseEntity.notFound().build()); // Se não, retorna 404 Not Found
+    }
+
+    // GET /api/clientes/pesquisar?nome=... - Busca clientes por nome
+    @GetMapping("/pesquisar")
+    public List<Cliente> pesquisarPorNome(@RequestParam String nome) {
+        return clienteRepository.findByNomeContainingIgnoreCase(nome);
+    }
+
+    // POST /api/clientes - Cria um novo cliente
+    @PostMapping
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')") // Apenas usuários com perfil ADMIN podem criar
+    public ResponseEntity<Cliente> criarCliente(@RequestBody Cliente cliente) {
+        Cliente novoCliente = clienteRepository.save(cliente);
+        return new ResponseEntity<>(novoCliente, HttpStatus.CREATED); // Retorna o cliente criado com status 201 Created
+    }
+
+    // PUT /api/clientes/{id} - Atualiza um cliente existente
+    @PutMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')") // Apenas ADMINs podem atualizar
+    public ResponseEntity<Cliente> atualizarCliente(@PathVariable Long id, @RequestBody Cliente clienteAtualizado) {
+        return clienteRepository.findById(id)
+                .map(clienteExistente -> {
+                    clienteExistente.setNome(clienteAtualizado.getNome());
+                    clienteExistente.setEmail(clienteAtualizado.getEmail());
+                    clienteExistente.setTelefone(clienteAtualizado.getTelefone());
+                    clienteExistente.setFuncao(clienteAtualizado.getFuncao());
+                    Cliente salvo = clienteRepository.save(clienteExistente);
+                    return ResponseEntity.ok(salvo);
+                })
+                .orElse(ResponseEntity.notFound().build());
+    }
+
+    // DELETE /api/clientes/{id} - Deleta um cliente
+    @DeleteMapping("/{id}")
+    @PreAuthorize("hasAuthority('ROLE_ADMIN')") // Apenas ADMINs podem deletar
+    public ResponseEntity<Void> deletarCliente(@PathVariable Long id) {
+        if (!clienteRepository.existsById(id)) {
+            return ResponseEntity.notFound().build();
         }
-        clienteRepository.save(cliente);
-        // Redireciona para uma página de listagem de clientes
-        return new ModelAndView("redirect:/clientes");
-    }
-
-// Este método agora vai chamar a sua nova página listClientes.html
-@GetMapping("/clientes")
-public ModelAndView listarClientes() {
-    ModelAndView modelAndView = new ModelAndView("listClientes");
-    modelAndView.addObject("clientesList", clienteRepository.findAll());
-    return modelAndView;
-}
-
-// Este método agora vai redirecionar os resultados da pesquisa para outra página
-// que você pode criar ou adaptar, como a pesquisa-resultado.html
-@PostMapping("/pesquisar-cliente")
-public ModelAndView pesquisarCliente(@RequestParam(required = false) String nome) {
-    ModelAndView modelAndView = new ModelAndView("listClientes"); // Mostra os resultados na mesma página
-    List<Cliente> listaClientes;
-    if(nome == null || nome.trim().isEmpty()) {
-        listaClientes = clienteRepository.findAll();
-    } else {
-        listaClientes = clienteRepository.findByNomeContainingIgnoreCase(nome);
-    }
-    modelAndView.addObject("clientesList", listaClientes);
-    return modelAndView;
-    }
-    
-    // As funções de editar e remover podem ser mantidas, mas aponte o redirect para /clientes
-    @GetMapping("/clientes/editar/{id}")
-    public ModelAndView editarCliente(@PathVariable("id") Long id) {
-        ModelAndView modelAndView = new ModelAndView("formCliente"); // Reutiliza o formulário
-        Cliente cliente = clienteRepository.findById(id).orElse(null);
-        modelAndView.addObject("cliente", cliente);
-        return modelAndView;
-    }
-
-    @GetMapping("/clientes/remover/{id}")
-    public String removerCliente(@PathVariable("id") Long id) {
         clienteRepository.deleteById(id);
-        return "redirect:/clientes";
+        return ResponseEntity.noContent().build(); // Retorna status 204 No Content
     }
 }

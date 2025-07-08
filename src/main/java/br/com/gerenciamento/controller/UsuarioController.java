@@ -57,13 +57,12 @@ public class UsuarioController {
         try {
             // Tenta salvar o usuário
             serviceUsuario.salvarUsuario(usuario);
-            // Se conseguir, redireciona para a página inicial
             modelAndView.setViewName("redirect:/");
         } catch (EmailExistsException e) {
             // Se a exceção de e-mail duplicado for capturada:
-            modelAndView.setViewName("cadastro"); // 1. Continua na página de cadastro
-            modelAndView.addObject("usuario", usuario); // 2. Devolve os dados já preenchidos
-            modelAndView.addObject("msg", e.getMessage()); // 3. Envia a mensagem de erro para a tela
+            modelAndView.setViewName("cadastro");
+            modelAndView.addObject("usuario", usuario);
+            modelAndView.addObject("msg", e.getMessage());
         }
         return modelAndView;
     }

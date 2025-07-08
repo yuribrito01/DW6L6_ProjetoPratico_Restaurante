@@ -1,14 +1,12 @@
 package br.com.gerenciamento.service;
 
-import br.com.gerenciamento.exception.CriptoExistsException;
+import br.com.gerenciamento.dtos.RegisterDTO;
 import br.com.gerenciamento.exception.EmailExistsException;
-import br.com.gerenciamento.repository.UsuarioRepository;
-import br.com.gerenciamento.exception.ServiceExc;
 import br.com.gerenciamento.model.Usuario;
-import br.com.gerenciamento.util.Util;
+import br.com.gerenciamento.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
-import java.security.NoSuchAlgorithmException;
 
 @Service
 public class ServiceUsuario {
@@ -16,24 +14,22 @@ public class ServiceUsuario {
     @Autowired
     private UsuarioRepository usuarioRepository;
 
-    public void salvarUsuario(Usuario user) throws Exception {
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
-        try {
-
-            if(usuarioRepository.findByEmail(user.getEmail()) !=null) {
-                throw new EmailExistsException("Este email já esta cadastrado: " + user.getEmail());
-            }
-
-            user.setSenha(Util.md5(user.getSenha()));
-
-        } catch (NoSuchAlgorithmException e) {
-            throw new CriptoExistsException("Error na criptografia da senha");
+    public void salvarUsuario(RegisterDTO data) throws EmailExistsException {
+        if (this.usuarioRepository.findByEmail(data.email()) != null) {
+            throw new EmailExistsException("Este email já está cadastrado: " + data.email());
         }
-        usuarioRepository.save(user);
-    }
 
-    public Usuario loginUser(String user, String senha) throws ServiceExc {
+        String encryptedPassword = passwordEncoder.encode(data.senha());
+        
+        Usuario novoUsuario = new Usuario();
+        novoUsuario.setEmail(data.email());
+        novoUsuario.setUser(data.user());
+        novoUsuario.setSenha(encryptedPassword); 
+        novoUsuario.setRole(data.role()); 
 
-        return usuarioRepository.buscarLogin(user, senha);
+        this.usuarioRepository.save(novoUsuario);
     }
 }
