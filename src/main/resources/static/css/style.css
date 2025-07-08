@@ -1,0 +1,96 @@
+@charset "UTF-8";
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+a {
+    cursor: pointer;
+    font-weight: bold;
+    text-decoration: none;
+}
+
+.main-background-section {
+    position: relative; 
+    min-height: 90vh; 
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    padding: 40px;
+}
+
+/* Camada escura sobre a imagem de fundo */
+.main-background-section .sombra {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 1; 
+}
+
+/* Container para o conteúdo, para que fique acima da sombra */
+.content-container {
+    position: relative;
+    z-index: 2; /* Fica acima da sombra */
+    text-align: center;
+    color: #413e3e; /* Cor do texto principal */
+}
+
+.content-container h1 {
+    font-size: 3em;
+    font-weight: 700;
+    margin-bottom: 40px;
+}
+
+/* Agrupamento dos botões */
+.button-group {
+    display: flex;
+    justify-content: center;
+    gap: 25px;
+    flex-wrap: wrap;
+}
+
+/* Estilo dos botões principais */
+.action-button-bordered {
+    color: #413e3e;
+    border: 3px solid #5f5b5b; /* Borda azul clara */
+    border-radius: 10px;
+    padding: 15px 35px;
+    font-size: 1.1em;
+    background-color: transparent;
+    transition: all 0.3s ease;
+}
+
+.action-button-bordered:hover {
+    color: #0a0909; /* Letra fica branca para melhor contraste */
+    background-color: rgba(53, 71, 130, 0.15); /* Fundo branco com 15% de opacidade */
+    border-color: #080808; /* Borda também fica branca */
+    transform: translateY(-3px); /* Efeito de levantar */
+}
+
+/* Responsividade para telas menores */
+@media screen and (max-width: 768px) {
+    .content-container h1 {
+        font-size: 2.2em;
+    }
+
+    .button-group {
+        flex-direction: column; /* Botões um embaixo do outro */
+        align-items: center;
+    }
+}
+
+/* ESTILO PARA BOTÕES DESATIVADOS                          */
+.btn-disabled {
+    background-color: #6c757d; /* Cinza padrão do Bootstrap */
+    border-color: #6c757d;
+    color: #ffffff;
+    cursor: not-allowed; /* Mostra um cursor de "proibido" */
+    pointer-events: none; /* Impede que o botão seja clicado */
+    opacity: 0.65; /* Deixa o botão um pouco transparente */
+}
