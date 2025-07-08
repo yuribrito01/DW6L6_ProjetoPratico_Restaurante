@@ -29,25 +29,43 @@ Este projeto representa a segunda fase e a evolução de uma aplicação web mon
 
 ---
 
-## 3. Demonstração da Aplicação (Versão Antiga - MVC/)
+## 3. Primeira entrega do projeto - Hibernate, JSP, JDBC, Servlet
 
-O GIF abaixo demonstra a interface gráfica da primeira versão do projeto. A versão atual, uma API RESTful, não possui interface gráfica e é interagida através de endpoints JSON, como documentado no "Guia da API".
+O GIF abaixo demonstra a interface gráfica da primeira versão do projeto.
+
+Tecnologias que foram utilizadas:
+> Java 11+
+> 
+> Jakarta Servlet API
+> 
+> JSP (Java Server Pages)
+> 
+> JDBC (Java Database Connectivity)
+> 
+> MySQL
+> 
+> Apache Tomcat 11.x
+> 
+> MySQL Connector/J
 
 ![sistemarestaurante](https://github.com/user-attachments/assets/15d92efb-287d-430a-a8f6-23817da5d154)
 
 ---
 
-## 4. Configuração do Ambiente e Execução
+## 4. Última etapa do projeto
+A versão atual, uma API RESTful, não possui interface gráfica e é interagida através de endpoints JSON, como documentado no ["Guia da API"](https://github.com/yuribrito01/DW6L6_ProjetoPratico_Restaurante/edit/main/README.md#6-guia-da-api-endpoints)
+
+## 5. Configuração do Ambiente e Execução
 
 Siga os passos abaixo para clonar, configurar e executar o projeto localmente.
 
-### 4.1. Pré-requisitos
+### 5.1. Pré-requisitos
 * Java 17 ou superior.
 * Apache Maven 3.6 ou superior.
 * MySQL 8.0 ou superior.
 * Uma ferramenta de API, como o [Postman](https://www.postman.com/downloads/).
 
-### 4.2. Passos para Execução
+### 5.2. Passos para Execução
 1.  **Clone o repositório:**
     ```bash
     git clone [https://github.com/yuribrito01/DW6L6_ProjetoPratico_Restaurante.git](https://github.com/yuribrito01/DW6L6_ProjetoPratico_Restaurante.git)
@@ -78,17 +96,17 @@ Siga os passos abaixo para clonar, configurar e executar o projeto localmente.
 
 ---
 
-## 5. Guia da API (Endpoints)
+## 6. Guia da API (Endpoints)
 
 Use o Postman ou similar para interagir com os endpoints abaixo.
 
-### 5.1. Autenticação
+### 6.1. Autenticação
 
 #### **Registrar um Novo Usuário**
-* **Verbo:** `POST`
-* **URL:** `/api/auth/register`
-* **Descrição:** Cria um novo usuário. A `role` pode ser "ROLE_USER" ou "ROLE_ADMIN".
-* **Corpo da Requisição (JSON):**
+* Method: `POST`
+* URL: `http://localhost:8080/api/auth/register`
+* Descrição: Cria um novo usuário. A `role` pode ser "ROLE_USER" ou "ROLE_ADMIN".
+* Corpo da Requisição (JSON):
     ```json
     {
         "email": "admin@restaurante.com",
@@ -97,33 +115,44 @@ Use o Postman ou similar para interagir com os endpoints abaixo.
         "role": "ROLE_ADMIN"
     }
     ```
-* **Resposta de Sucesso:** `200 OK`
+Resposta de Sucesso: `200 OK`
+
+* Faça o mesmo para um novo usuário, mas agora um ROLE_USER
+    ```json
+    {
+    "email": "fulanocliente@gmail.com",
+    "user": "fulano",
+    "senha": "password123",
+    "role": "ROLE_USER"
+    }
+    ```
+Resposta de Sucesso: `200 OK`
 
 #### **Fazer Login e Obter Token**
-* **Verbo:** `POST`
-* **URL:** `/api/auth/login`
-* **Descrição:** Autentica um usuário e retorna um token JWT.
-* **Corpo da Requisição (JSON):**
+* Verbo: `POST`
+* URL: `http://localhost:8080/api/auth/login`
+* Descrição: Autentica um usuário e retorna um token JWT.
+* Corpo da Requisição (JSON):
     ```json
     {
         "email": "admin@restaurante.com",
         "senha": "password123"
     }
     ```
-* **Resposta de Sucesso (JSON):**
+* Resposta de Sucesso (JSON):
     ```json
     {
         "token": "eyJhbGciOiJIUzI1NiJ9.eyJzdWIiOiJhZG1pbkByZXN0YXVyYW50ZS5jb20iLCJpYXQiOjE3..."
     }
     ```
 
-### 5.2. Clientes
+### 6.2. Clientes
 
 *Para acessar os endpoints de clientes, é necessário enviar o token JWT no cabeçalho `Authorization` como `Bearer <seu_token>`.*
 
 #### **Listar Todos os Clientes**
 * **Verbo:** `GET`
-* **URL:** `/api/clientes`
+* **URL:** `http://localhost:8080/api/clientes`
 * **Resposta de Sucesso (JSON):**
     ```json
     [
@@ -139,8 +168,8 @@ Use o Postman ou similar para interagir com os endpoints abaixo.
 
 #### **Criar um Novo Cliente**
 * **Verbo:** `POST`
-* **URL:** `/api/clientes`
-* **Autorização:** Requer perfil `ROLE_ADMIN`.
+* **URL:** `http://localhost:8080/api/clientes`
+* **Autorização:** Requer perfil ROLE_ADMIN
 * **Corpo da Requisição (JSON):**
     ```json
     {
@@ -154,15 +183,13 @@ Use o Postman ou similar para interagir com os endpoints abaixo.
 
 #### **Deletar um Cliente**
 * **Verbo:** `DELETE`
-* **URL:** `/api/clientes/{id}`
-* **Autorização:** Requer perfil `ROLE_ADMIN`.
+* **URL:** `http://localhost:8080/api/clientes/{id}`
+* **Autorização:** Requer perfil ROLE_ADMIN
 * **Resposta de Sucesso:** `204 No Content`
-
-*(Documente os outros endpoints de Mesa e Reserva aqui seguindo o mesmo modelo)*
 
 ---
 
-## 6. Estrutura do Projeto
+## 7. Estrutura do Projeto
 
 A aplicação segue uma arquitetura em camadas para promover baixo acoplamento e alta coesão:
 * **`config`**: Configurações de segurança do Spring Security e JWT.
