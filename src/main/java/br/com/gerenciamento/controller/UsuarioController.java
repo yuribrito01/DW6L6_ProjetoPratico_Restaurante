@@ -13,6 +13,7 @@ import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.servlet.ModelAndView;
+import br.com.gerenciamento.dtos.RegisterDTO;
 
 import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
@@ -52,20 +53,27 @@ public class UsuarioController {
     }
 
 @PostMapping("/salvarUsuario")
-    public ModelAndView cadastrar(Usuario usuario) throws Exception {
+    public ModelAndView cadastrar(@Valid RegisterDTO data, BindingResult result) throws Exception {
         ModelAndView modelAndView = new ModelAndView();
+
+        if (result.hasErrors()) {
+            modelAndView.setViewName("cadastro");
+            modelAndView.addObject("usuario", data);
+            return modelAndView;
+        }
+
         try {
-            // Tenta salvar o usuário
-            serviceUsuario.salvarUsuario(usuario);
+            serviceUsuario.salvarUsuario(data);
             modelAndView.setViewName("redirect:/");
         } catch (EmailExistsException e) {
-            // Se a exceção de e-mail duplicado for capturada:
             modelAndView.setViewName("cadastro");
-            modelAndView.addObject("usuario", usuario);
+            modelAndView.addObject("usuario", data);
             modelAndView.addObject("msg", e.getMessage());
         }
+
         return modelAndView;
     }
+
 
     @PostMapping("/login")
     public ModelAndView login(@Valid Usuario usuario, BindingResult br,
